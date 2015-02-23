@@ -16,31 +16,35 @@ cha = {@(x) 1, @(x) 11, @(x) 12, @(x) 25, @(x) 40, @(x) 6, ...
 move_maker = @(x) (x<41)*x + (x>=41)*(x-40);
 d1 = 6; d2 = 6;
 max_games = 150;
-max_throws = 1500;
+max_throws = 150000;
 % all_tile_counts = zeros(1,40);
-all_tile_counts = randi(1,40,1)*0;
+% all_tile_counts = randi(1,40,1)*0;
+cca_deck = 1:16;
+cha_deck = 1:16;
+move = [randi([1, d1], max_throws, 1), randi([1, d2], max_throws, 1)]; 
 
-for j = 1:max_games
+
+% for j = 1:max_games
     
     tile_counts = zeros(40,1);
 %     tile_counts(1) = 1;
     isdouble = 0;
-    prev_tile = 1;
+    % prev_tile = 1;
     current_tile = 1;
-    cca_choice = 1;
-    cha_choice = 1;
+    % ica_choice = 1;
+    % cha_choice = 1;
 
-    cca_deck = my_rand_perm()';
-    cha_deck = my_rand_perm()';
+    % cca_deck = my_rand_perm()';
+    % cha_deck = my_rand_perm()';
     
     for i = 1:max_throws
-        move = [randi([1, d1], 1, 1), randi([1, d2], 1, 1)];
-        isdouble = (move(1)==move(2))*(isdouble+1);
+        % move = [randi([1, d1], 1, 1), randi([1, d2], 1, 1)];
+        isdouble = (move(i, 1)==move(i, 2))*(isdouble+1);
 
         if isdouble == 3 % third double in a row?
             current_tile = 11; % Move to jail
         else
-            current_tile = move_maker(current_tile+sum(move));
+            current_tile = move_maker(current_tile+sum(move(i,:)));
             if sum(current_tile == [3, 18, 34]) % are we on a community chest?
 %                 fprintf('Stopped at community chest, drew %.0f\n',cca_deck(1))
 %                 fprintf('Changed postion from %s',tiles_str{current_tile})
@@ -70,14 +74,16 @@ for j = 1:max_games
             tile_counts(current_tile) = tile_counts(current_tile) + 1;
 %             prev_tile = current_tile;
 %         end
+    % end
+    if ~mod(i, 500)
+        fprintf('Sampled %.0f of %.0f games\n',i, max_throws)
     end
-    if ~mod(j, 50)
-        fprintf('Sampled %.0f of %.0f games\n',j, max_games)
-    end
-    all_tile_counts = all_tile_counts + tile_counts;
+    % all_tile_counts = all_tile_counts + tile_counts;
 end
+% end
 
-[tile_probs, idx_order] = sort(all_tile_counts/sum(all_tile_counts),'descend');
+% [tile_probs, idx_order] = sort(all_tile_counts/sum(all_tile_counts),'descend');
+[tile_probs, idx_order] = sort(tile_counts/sum(tile_counts),'descend');
 fprintf('1st most probable card: %s, with probability %2.2f%%\n', tiles_str{idx_order(1)}, tile_probs(1)*100)
 fprintf('2nd most probable card: %s, with probability %2.2f%%\n', tiles_str{idx_order(2)}, tile_probs(2)*100)
 fprintf('3rd most probable card: %s, with probability %2.2f%%\n', tiles_str{idx_order(3)}, tile_probs(3)*100)
