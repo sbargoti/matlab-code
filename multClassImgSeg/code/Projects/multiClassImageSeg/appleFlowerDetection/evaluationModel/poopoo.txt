@@ -1,0 +1,7 @@
+\begin{small}\begin{tabular}{|l|r|r|}
+\hline
+&\textbf{Void}&\textbf{flower}\\\hline
+\textbf{Void}&96.2&21.8\\\hline
+\textbf{flower}&3.8&78.2\\\hline
+\end{tabular}
+\end{small}

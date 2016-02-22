@@ -21,3 +21,4 @@ axis equal
 axis vis3d
 hold on;
 plot3(pcNotFace(:,1),pcNotFace(:,2),pcNotFace(:,3),'r.');
+pause

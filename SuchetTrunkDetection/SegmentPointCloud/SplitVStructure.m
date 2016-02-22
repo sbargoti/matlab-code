@@ -87,9 +87,9 @@ for i = 1:length(xWindows)-1
     else
         set(ph3,'Xdata',boundaryPoint(i),'Ydata',interp1(Y,pointCount,boundaryPoint(i)))
     end
-    if i == 14
-    keyboard;
-    end
+%     if i == 14
+%     keyboard;
+%     end
 end
 
 % Plot for paper:

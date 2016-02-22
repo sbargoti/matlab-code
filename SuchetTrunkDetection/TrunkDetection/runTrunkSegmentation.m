@@ -14,13 +14,13 @@ parentFolder = {[root_dir, '\processed\',...
     [root_dir, '\processed\2013-03-apple-farm\shrimp\']};
 log_name = {'e8n-to-e2s';'e8-3-v-rows';'e22-e6-d20-d14-slow';'e20-24-i-row';'e20-to-e24';'Run2';'Run3'};
 
-% parentFolder = parentFolder{3};
+parentFolder = parentFolder{3};
 % log_name = log_name{6};
-parentFolder = parentFolder{1};
-log_name = log_name{1};
+% parentFolder = parentFolder{1};
+log_name = log_name{6};
 row_numbers=1;%[3 4 9 10 11 12];
 % row_numbers=[11 12];
-row_numbers=2;%1:18;
+row_numbers=1:18;
 
 row_type={'v-structure', 'i-structure'};
 row_type = row_type{1};
@@ -33,9 +33,9 @@ for row_number = row_numbers
 
     trunkSegmentationPart1(dataPath,row_number,row_type);
     
-    modelPath = [parentFolder,log_name,...
-    '\ladybug\images_cropped_undistorted_labels\training\'];
-    modelPath = os_filename(modelPath);
+%     modelPath = [parentFolder,log_name,...
+%     '\ladybug\images_cropped_undistorted_labels\training\'];
+%     modelPath = os_filename(modelPath);
 
 %     trunkSegmentationPart2(dataPath,modelPath,row_type);
 %   ViewSegmentationResults(dataPath,modelPath);

@@ -24,7 +24,9 @@ outputFolder = dataPath;
 [treeFace,treeFaceIDX] = ExtractTreeFace([x,y,z],row_type);
 % Reverse the z axis such that z points upwards (easier to visualise)
 treeFace(:,3) = -treeFace(:,3);
-% viewTreeFaceOnBackground(x,y,z,treeFaceIDX);
+viewTreeFaceOnBackground(x,y,z,treeFaceIDX);
+
+return
 
 %% Perform Hough Transform to get line fit observations
 [linePos, lineEnds, lineLength, linePointsIDX] = LineFitObservations(treeFace,1,row_type);
